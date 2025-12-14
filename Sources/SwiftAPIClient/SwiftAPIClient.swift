@@ -3,7 +3,7 @@
 
 import Foundation
 
-protocol APIClient {
+public protocol APIClient {
     var session: URLSession { get }
     var baseURL: URL { get }
     var defaultHeaders: [String: String] { get }
