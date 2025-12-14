@@ -73,7 +73,7 @@ extension APIClient {
 }
 
 extension APIClient {
-    var defaultHeadres: [String: String] { [:] }
+    var defaultHeaders: [String: String] { [:] }
 }
 
 extension APIClient {
