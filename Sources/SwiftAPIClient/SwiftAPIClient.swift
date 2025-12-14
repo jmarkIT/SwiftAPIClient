@@ -7,6 +7,7 @@ protocol APIClient {
     var session: URLSession { get }
     var baseURL: URL { get }
     var defaultHeaders: [String: String] { get }
+    func prepareForRequest() async
 }
 
 extension APIClient {
@@ -73,4 +74,10 @@ extension APIClient {
 
 extension APIClient {
     var defaultHeadres: [String: String] { [:] }
+}
+
+extension APIClient {
+    func prepareForRequest() async{
+       // Default: no rate limiting
+    }
 }
