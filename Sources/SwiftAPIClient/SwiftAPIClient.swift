@@ -11,9 +11,9 @@ public protocol APIClient {
 }
 
 extension APIClient {
-    func makeRequest(
+    fileprivate func makeRequest(
         endpoint: String,
-        method: String = "GET",
+        method: HTTPMethod,
         queryItems: [URLQueryItem]? = nil,
         body: Data? = nil,
         additionalHeaders: [String: String] = [:]
@@ -28,7 +28,7 @@ extension APIClient {
         }
 
         var request = URLRequest(url: finalURL)
-        request.httpMethod = method
+        request.httpMethod = method.rawValue
         request.httpBody = body
 
         request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -45,9 +45,9 @@ extension APIClient {
         return request
     }
 
-    func perform<T: Decodable>(
-        _ endpoint: String,
-        method: String = "GET",
+    fileprivate func perform<T: Decodable>(
+        endpoint: String,
+        method: HTTPMethod,
         queryItems: [URLQueryItem]? = nil,
         body: Data? = nil,
         headers: [String: String] = [:]
