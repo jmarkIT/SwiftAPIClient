@@ -77,7 +77,35 @@ extension APIClient {
 }
 
 extension APIClient {
-    func prepareForRequest() async{
-       // Default: no rate limiting
+    func prepareForRequest() async {
+        // Default: no rate limiting
+    }
+}
+
+extension APIClient {
+    public func get<T: Decodable>(
+        _ endpoint: String,
+        queryItems: [URLQueryItem]? = nil,
+        headers: [String: String] = [:]
+    ) async throws -> T {
+        try await perform(
+            endpoint: endpoint,
+            method: HTTPMethod.get,
+            queryItems: queryItems,
+            headers: headers
+        )
+    }
+
+    public func post<T: Decodable>(
+        _ endpoint: String,
+        body: Data? = nil,
+        headers: [String: String] = [:]
+    ) async throws -> T {
+        try await perform(
+            endpoint: endpoint,
+            method: HTTPMethod.post,
+            body: body,
+            headers: headers
+        )
     }
 }
